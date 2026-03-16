@@ -4,31 +4,18 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.Font
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.unit.sp
-import com.calcetinder_prueba.R
 
 /**
- * Proveedor de Google Fonts via GMS (Google Mobile Services).
- * Si el dispositivo no tiene GMS, cae silenciosamente al font del sistema.
+ * PoppinsFamily definido como FontFamily.SansSerif (Roboto en Android) mientras
+ * no esté configurado el recurso de certificados de Google Fonts (font_certs.xml).
+ *
+ * Para activar la tipografía Poppins real:
+ *  1. Añadir `app/src/main/res/values/font_certs.xml` con los certs de Google Fonts.
+ *  2. Restaurar GoogleFont.Provider + FontFamily(Font(googleFont = ...)) en este archivo.
+ *  La interfaz visual del resto del código NO cambia — solo la fuente renderizada.
  */
-private val googleFontProvider = GoogleFont.Provider(
-    providerAuthority = "com.google.android.gms.fonts",
-    providerPackage   = "com.google.android.gms",
-    certificates      = R.array.com_google_android_gms_fonts_certs
-)
-
-/** Poppins — sans-serif geométrica moderna, estilo similar a Tinder. */
-private val poppinsFont = GoogleFont("Poppins")
-
-val PoppinsFamily = FontFamily(
-    Font(googleFont = poppinsFont, fontProvider = googleFontProvider, weight = FontWeight.Normal),
-    Font(googleFont = poppinsFont, fontProvider = googleFontProvider, weight = FontWeight.Medium),
-    Font(googleFont = poppinsFont, fontProvider = googleFontProvider, weight = FontWeight.SemiBold),
-    Font(googleFont = poppinsFont, fontProvider = googleFontProvider, weight = FontWeight.Bold),
-    Font(googleFont = poppinsFont, fontProvider = googleFontProvider, weight = FontWeight.Black),
-)
+val PoppinsFamily: FontFamily = FontFamily.SansSerif
 
 val CalcetinderTypography = Typography(
     headlineLarge = TextStyle(

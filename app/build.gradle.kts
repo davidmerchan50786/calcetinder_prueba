@@ -66,8 +66,6 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
-    // Poppins via Google Fonts — misma familia tipográfica que Tinder
-    implementation(libs.compose.ui.text.google.fonts)
 
     // Material components — necesario para Theme.Material3.Light.NoActionBar en themes.xml
     implementation(libs.material)
