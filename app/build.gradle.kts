@@ -11,7 +11,7 @@ plugins {
 
 android {
     namespace = "com.calcetinder_prueba"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.calcetinder_prueba"
@@ -50,6 +50,7 @@ android {
             excludes += "/META-INF/NOTICE*"
         }
     }
+    // buildToolsVersion omitido — AGP elige automáticamente la versión correcta para compileSdk
 }
 
 kotlin {
