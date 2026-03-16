@@ -1,0 +1,24 @@
+rules_version = '2';
+
+// CALCETINDER — Reglas de Firebase Storage
+// Solo imágenes. Solo autenticados. Solo el propietario sube en su carpeta.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /socks/{userId}/{fileName} {
+      // Cualquier usuario autenticado puede ver los calcetines ajenos
+      allow read: if request.auth != null;
+
+      // Solo el propio usuario puede subir en su carpeta, con restricciones estrictas
+      allow write: if request.auth != null
+        && request.auth.uid == userId
+        && request.resource.size < 5 * 1024 * 1024          // máx 5 MB por calcetín
+        && request.resource.contentType.matches('image/.*'); // solo imágenes
+    }
+
+    // Cualquier otra ruta: denegada. Sin excepciones.
+    match /{allOtherPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

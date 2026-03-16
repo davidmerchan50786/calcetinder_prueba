@@ -1,0 +1,4 @@
+<resources>
+    <!-- Tema base: Material3 sin ActionBar (Compose gestiona la navegación) -->
+    <style name="Theme.Calcetinder_prueba" parent="Theme.Material3.Light.NoActionBar" />
+</resources>
