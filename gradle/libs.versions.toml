@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.0"
+agp = "8.13.2"
 kotlin = "2.1.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -19,7 +19,7 @@ lottie = "6.4.0"
 navigationCompose = "2.8.3"
 lifecycleCompose = "2.8.5"
 googleServices = "4.4.2"
-mlkitFaceDetection = "17.1.0"
+mlkitFaceDetection = "16.1.7"
 # Hilt — DI. KSP version debe coincidir exactamente con la versión de Kotlin.
 hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
