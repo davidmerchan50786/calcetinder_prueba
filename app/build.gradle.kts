@@ -66,6 +66,9 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
+    // Poppins descargable en tiempo de ejecución via Google Fonts (GMS)
+    // Certificados del proveedor en res/values/font_certs.xml
+    implementation(libs.compose.ui.text.google.fonts)
 
     // Material components — necesario para Theme.Material3.Light.NoActionBar en themes.xml
     implementation(libs.material)

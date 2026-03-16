@@ -39,6 +39,19 @@ import com.calcetinder_prueba.ui.theme.CalcetinderPink
 import com.calcetinder_prueba.ui.theme.LikeGreen
 import com.calcetinder_prueba.util.SatiricCopy
 
+/**
+ * Pantalla de matches — lista de pares de calcetines que se han gustado mutuamente.
+ *
+ * Estados posibles:
+ *  - [MatchesUiState.isLoading] → muestra [CircularProgressIndicator].
+ *  - Lista vacía → mensaje de estado vacío con texto satírico.
+ *  - Lista con datos → [LazyColumn] de [MatchCard]s, una por match.
+ *
+ * Cada [MatchCard] muestra las dos miniaturas del par y una línea de compatibilidad
+ * generada aleatoriamente por [SatiricCopy.matchCompatibility].
+ *
+ * @param viewModel ViewModel Hilt que carga los matches del usuario desde Firestore.
+ */
 @Composable
 fun MatchesScreen(viewModel: MatchesViewModel = hiltViewModel()) {
     val state by viewModel.uiState.collectAsState()
@@ -111,6 +124,14 @@ fun MatchesScreen(viewModel: MatchesViewModel = hiltViewModel()) {
     }
 }
 
+/**
+ * Tarjeta de un match individual.
+ *
+ * Muestra el indicador de match (texto verde), las dos miniaturas del par de calcetines
+ * en [Row] con peso 1f cada una, y la línea de compatibilidad satírica.
+ *
+ * @param match Objeto [Match] con los IDs, nombres y URLs de imagen de los dos calcetines.
+ */
 @Composable
 private fun MatchCard(match: Match) {
     Card(
@@ -162,6 +183,16 @@ private fun MatchCard(match: Match) {
     }
 }
 
+/**
+ * Miniatura de un calcetín dentro de una [MatchCard].
+ *
+ * Muestra la imagen cuadrada recortada con esquinas redondeadas (120×120 dp) y el nombre
+ * debajo, truncado a una línea para mantener el layout simétrico.
+ *
+ * @param imageUrl  URL pública de la imagen del calcetín en Firebase Storage.
+ * @param name      Nombre del calcetín (fallback [SatiricCopy.SOCK_NAME_PLACEHOLDER] si está vacío).
+ * @param modifier  Modifier externo, normalmente [Modifier.weight(1f)] para dividir el espacio.
+ */
 @Composable
 private fun MatchSockThumbnail(imageUrl: String, name: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {

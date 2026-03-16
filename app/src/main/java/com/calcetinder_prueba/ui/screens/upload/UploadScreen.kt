@@ -29,6 +29,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -54,6 +55,20 @@ import com.calcetinder_prueba.ui.theme.CalcetinderPink
 import com.calcetinder_prueba.ui.theme.NopeRed
 import com.calcetinder_prueba.util.SatiricCopy
 
+/**
+ * Pantalla de subida de calcetines.
+ *
+ * Flujo:
+ *  1. El usuario elige una foto desde la galería (se pide permiso READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE).
+ *  2. [UploadViewModel.onImageSelected] guarda el URI y dispara el análisis ML Kit.
+ *  3. Si ML Kit detecta caras, se muestra [UploadUiState.FaceDetected] con un roast satírico
+ *     sobre el narcisismo del usuario (overlay rojo a pantalla completa).
+ *  4. Si no hay caras, el usuario rellena nombre + descripción y pulsa "Subir".
+ *  5. Al completarse con éxito ([UploadUiState.Success]) se navega de vuelta al feed de swipe.
+ *
+ * @param onUploadSuccess Callback de navegación ejecutado cuando la subida concluye con éxito.
+ * @param viewModel ViewModel Hilt que gestiona la lógica de subida y el estado de la UI.
+ */
 @Composable
 fun UploadScreen(
     onUploadSuccess: () -> Unit,
@@ -109,7 +124,7 @@ fun UploadScreen(
 
             Text(
                 text = SatiricCopy.UPLOAD_SUBTITLE,
-                style = androidx.compose.material3.MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyMedium,
                 color = Color.Gray,
                 textAlign = TextAlign.Center
             )
@@ -224,7 +239,7 @@ fun UploadScreen(
                     text = (uiState as UploadUiState.Error).message,
                     color = NopeRed,
                     textAlign = TextAlign.Center,
-                    style = androidx.compose.material3.MaterialTheme.typography.bodyMedium
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
 
@@ -271,6 +286,13 @@ fun UploadScreen(
     }
 }
 
+/**
+ * Colores estandarizados para los [OutlinedTextField] del formulario de subida.
+ *
+ * - Borde activo: [CalcetinderPink] (coherente con el color de marca).
+ * - Borde inactivo: rosa muy suave para mantener visibilidad sin distraer.
+ * - Texto: oscuro sobre fondo claro, legible en modo diurno.
+ */
 @Composable
 private fun uploadFieldColors() = OutlinedTextFieldDefaults.colors(
     focusedBorderColor = CalcetinderPink,
