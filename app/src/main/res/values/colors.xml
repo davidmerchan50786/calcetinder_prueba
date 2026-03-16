@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pink_primary">#EC4899</color>
-    <color name="pink_light">#FDF2F8</color>
-    <color name="pink_dark">#BE185D</color>
-    <color name="like_green">#22C55E</color>
-    <color name="nope_red">#EF4444</color>
+    <!-- Paleta principal — alineada con CalcetinderPink (Tinder red) -->
+    <color name="pink_primary">#FF4458</color>
+    <color name="pink_light">#FFF0F0</color>
+    <color name="pink_dark">#DD2438</color>
+    <color name="like_green">#00C853</color>
+    <color name="nope_red">#FF4458</color>
     <color name="dark_text">#111827</color>
     <color name="gray_text">#6B7280</color>
+    <!-- gray_lighter: fondo claro para campos de entrada (ref. input_bg.xml) -->
+    <color name="gray_lighter">#F3F4F6</color>
     <color name="white">#FFFFFF</color>
-    <color name="ic_launcher_background">#EC4899</color>
+    <color name="ic_launcher_background">#FF4458</color>
     <!-- Alias 'primary' necesario para ic_launcher_background.xml heredado -->
-    <color name="primary">#EC4899</color>
+    <color name="primary">#FF4458</color>
 </resources>
