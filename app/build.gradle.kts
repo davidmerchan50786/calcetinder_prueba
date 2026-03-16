@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.compose.material.icons.extended)
 
+    // Material components — necesario para Theme.Material3.Light.NoActionBar en themes.xml
+    implementation(libs.material)
     implementation(libs.activity.compose)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
