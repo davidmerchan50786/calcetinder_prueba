@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.airbnb.lottie.compose.LottieAnimation
+import com.calcetinder_prueba.ui.components.CalcetinderLogo
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
@@ -61,7 +62,7 @@ fun SwipeScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF8F0F5))
+            .background(Color(0xFFF5F5F5))
             .systemBarsPadding()
     ) {
         Column(
@@ -76,13 +77,19 @@ fun SwipeScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = SatiricCopy.APP_NAME,
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Black,
-                    color = CalcetinderPink,
-                    letterSpacing = 2.sp
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    CalcetinderLogo(sizeDp = 28.dp)
+                    Text(
+                        text = SatiricCopy.APP_NAME,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Black,
+                        color = CalcetinderPink,
+                        letterSpacing = 2.sp
+                    )
+                }
                 IconButton(onClick = onNavigateToUpload) {
                     Icon(
                         imageVector = Icons.Default.Upload,

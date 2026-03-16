@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.calcetinder_prueba.ui.components.CalcetinderLogo
 import com.calcetinder_prueba.ui.theme.CalcetinderPink
 import com.calcetinder_prueba.util.SatiricCopy
 
@@ -80,19 +81,27 @@ fun AuthScreen(
                 .padding(horizontal = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(72.dp))
+            Spacer(modifier = Modifier.height(56.dp))
 
-            // Título principal
+            // Logo satírico: calcetín-llama estilo Tinder
+            CalcetinderLogo(
+                sizeDp = 72.dp,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            // Nombre de la app
             Text(
                 text = SatiricCopy.APP_NAME,
-                fontSize = 42.sp,
+                fontSize = 38.sp,
                 fontWeight = FontWeight.Black,
                 color = CalcetinderPink,
                 textAlign = TextAlign.Center,
                 letterSpacing = 4.sp
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             Text(
                 text = SatiricCopy.AUTH_TAGLINE,
