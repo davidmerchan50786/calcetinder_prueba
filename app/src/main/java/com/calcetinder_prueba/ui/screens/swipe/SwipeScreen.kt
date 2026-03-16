@@ -20,6 +20,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Favorite
@@ -267,15 +269,20 @@ private fun EmptySwipeState(onNavigateToUpload: () -> Unit) {
     }
 }
 
+/**
+ * Botón circular de acción estilo Tinder: fondo blanco, icono de color, sombra elevada.
+ * La sombra hace que los botones "floten" sobre el fondo — característica visual clave de Tinder.
+ */
 @Composable
 private fun ActionButton(
     onClick: () -> Unit,
     icon: androidx.compose.ui.graphics.vector.ImageVector,
     tint: Color,
-    size: androidx.compose.ui.unit.Dp
+    size: Dp
 ) {
     Box(
         modifier = Modifier
+            .shadow(elevation = 8.dp, shape = CircleShape)
             .size(size)
             .background(Color.White, CircleShape)
             .clickable { onClick() },
@@ -285,7 +292,7 @@ private fun ActionButton(
             imageVector = icon,
             contentDescription = null,
             tint = tint,
-            modifier = Modifier.size(size * 0.5f)
+            modifier = Modifier.size(size * 0.48f)
         )
     }
 }

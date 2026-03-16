@@ -52,7 +52,7 @@ fun ProfileScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF0F0F0F))
+            .background(Color(0xFFF8F8F8))   // Fondo claro — consistente con SwipeScreen
             .systemBarsPadding()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 24.dp),
@@ -60,115 +60,96 @@ fun ProfileScreen(
     ) {
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Título
         Text(
-            text = SatiricCopy.PROFILE_TITLE,
-            fontSize = 28.sp,
-            fontWeight = FontWeight.Black,
-            color = CalcetinderPink,
+            text          = SatiricCopy.PROFILE_TITLE,
+            fontSize      = 28.sp,
+            fontWeight    = FontWeight.Black,
+            color         = CalcetinderPink,
             letterSpacing = 3.sp
         )
-
         Spacer(modifier = Modifier.height(8.dp))
-
         Text(
-            text = SatiricCopy.PROFILE_SUBTITLE,
-            fontSize = 13.sp,
-            color = Color(0xFF888888),
+            text      = SatiricCopy.PROFILE_SUBTITLE,
+            fontSize  = 13.sp,
+            color     = Color(0xFF9CA3AF),
             textAlign = TextAlign.Center,
             lineHeight = 20.sp
         )
 
         Spacer(modifier = Modifier.height(40.dp))
 
-        // Avatar — icono anónimo, sin foto (coherente con la filosofía anti-ego)
+        // Avatar anónimo (coherente con la filosofía anti-ego de la app)
         Box(
             modifier = Modifier
                 .size(100.dp)
-                .background(Color(0xFF1A1A1A), CircleShape)
-                .border(2.dp, CalcetinderPink.copy(alpha = 0.4f), CircleShape),
+                .background(Color.White, CircleShape)
+                .border(2.dp, CalcetinderPink.copy(alpha = 0.35f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = Icons.Default.Person,
                 contentDescription = null,
-                tint = Color(0xFF444444),
+                tint = Color(0xFFD1D5DB),
                 modifier = Modifier.size(52.dp)
             )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Tarjeta de datos del usuario
+        // Tarjeta de datos
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color(0xFF1A1A1A), RoundedCornerShape(16.dp))
-                .border(1.dp, Color(0xFF2A2A2A), RoundedCornerShape(16.dp))
+                .background(Color.White, RoundedCornerShape(16.dp))
+                .border(1.dp, Color(0xFFF3F4F6), RoundedCornerShape(16.dp))
                 .padding(20.dp)
         ) {
+            ProfileRow(label = "EMAIL", value = viewModel.userEmail.ifBlank { "—" }, valueMaxLines = 1)
+            HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = Color(0xFFF3F4F6))
+            ProfileRow(label = "ID DE PORTADOR", value = viewModel.userIdShort)
+            HorizontalDivider(modifier = Modifier.padding(vertical = 12.dp), color = Color(0xFFF3F4F6))
             ProfileRow(
-                label = "EMAIL",
-                value = viewModel.userEmail.ifBlank { "—" },
-                valueMaxLines = 1
-            )
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 12.dp),
-                color = Color(0xFF2A2A2A)
-            )
-            ProfileRow(
-                label = "ID DE PORTADOR",
-                value = viewModel.userIdShort
-            )
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 12.dp),
-                color = Color(0xFF2A2A2A)
-            )
-            ProfileRow(
-                label = SatiricCopy.PROFILE_ROLE_LABEL,
-                value = SatiricCopy.PROFILE_ROLE_VALUE,
-                valueColor = CalcetinderPink.copy(alpha = 0.8f)
-            )
-        }
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        // Nota satírica
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color(0xFF0D0D0D), RoundedCornerShape(10.dp))
-                .border(1.dp, Color(0xFF2A2A2A), RoundedCornerShape(10.dp))
-                .padding(16.dp)
-        ) {
-            Text(
-                text = SatiricCopy.PROFILE_LOGOUT_CONFIRM,
-                fontSize = 12.sp,
-                color = Color(0xFF555555),
-                lineHeight = 18.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                label      = SatiricCopy.PROFILE_ROLE_LABEL,
+                value      = SatiricCopy.PROFILE_ROLE_VALUE,
+                valueColor = CalcetinderPink
             )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Botón logout
-        Button(
-            onClick = { viewModel.logout() },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF2A0A0A),
-                contentColor = Color(0xFFFF6B6B)
-            ),
-            shape = RoundedCornerShape(12.dp),
+        // Nota satírica
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(52.dp)
+                .background(Color(0xFFFFF0F0), RoundedCornerShape(10.dp))
+                .padding(16.dp)
         ) {
             Text(
-                text = SatiricCopy.PROFILE_LOGOUT_BTN,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 15.sp
+                text      = SatiricCopy.PROFILE_LOGOUT_CONFIRM,
+                fontSize  = 12.sp,
+                color     = Color(0xFF9CA3AF),
+                lineHeight = 18.sp,
+                textAlign = TextAlign.Center,
+                modifier  = Modifier.fillMaxWidth()
+            )
+        }
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Botón logout con borde rojo sutil
+        Button(
+            onClick = { viewModel.logout() },
+            colors  = ButtonDefaults.buttonColors(
+                containerColor = CalcetinderPink,
+                contentColor   = Color.White
+            ),
+            shape    = RoundedCornerShape(14.dp),
+            modifier = Modifier.fillMaxWidth().height(52.dp)
+        ) {
+            Text(
+                text       = SatiricCopy.PROFILE_LOGOUT_BTN,
+                fontWeight = FontWeight.Bold,
+                fontSize   = 15.sp
             )
         }
 
@@ -180,25 +161,25 @@ fun ProfileScreen(
 private fun ProfileRow(
     label: String,
     value: String,
-    valueColor: Color = Color(0xFFCCCCCC),
+    valueColor: Color = Color(0xFF374151),
     valueMaxLines: Int = 2
 ) {
     Column {
         Text(
-            text = label,
-            fontSize = 10.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color(0xFF555555),
+            text          = label,
+            fontSize      = 10.sp,
+            fontWeight    = FontWeight.Bold,
+            color         = Color(0xFF9CA3AF),
             letterSpacing = 1.5.sp
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = value,
-            fontSize = 14.sp,
-            color = valueColor,
+            text       = value,
+            fontSize   = 14.sp,
+            color      = valueColor,
             fontWeight = FontWeight.Medium,
-            maxLines = valueMaxLines,
-            overflow = TextOverflow.Ellipsis,
+            maxLines   = valueMaxLines,
+            overflow   = TextOverflow.Ellipsis,
             lineHeight = 20.sp
         )
     }
