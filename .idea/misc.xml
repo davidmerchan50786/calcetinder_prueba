@@ -4,7 +4,7 @@
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="c9cd3eac-23ca-441a-b692-e8aebd10b6ca" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

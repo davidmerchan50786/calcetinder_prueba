@@ -42,26 +42,43 @@ class SwipeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
+    /** Registra un like sobre [sock] y comprueba si hay match mutuo. */
     fun swipeLike(sock: Sock) = swipe(sock, liked = true)
+
+    /** Registra un nope sobre [sock] y lo elimina de la lista. */
     fun swipeNope(sock: Sock) = swipe(sock, liked = false)
 
+    /**
+     * Lógica compartida de swipe:
+     * 1. Elimina la carta de la UI inmediatamente para UX fluido.
+     * 2. Persiste el swipe en Firestore en background.
+     * 3. Si hay error de red, reinserta la carta al inicio para que el usuario reintente.
+     */
     private fun swipe(sock: Sock, liked: Boolean) {
         val userId = authRepository.currentUserId ?: return
-        // Eliminar la carta de la lista inmediatamente (UX fluido)
         _uiState.value = _uiState.value.copy(
             socks = _uiState.value.socks.filter { it.id != sock.id }
         )
         viewModelScope.launch {
-            sockRepository.swipeOnSock(userId, sock, liked).onSuccess { isMatch ->
-                if (isMatch) {
+            sockRepository.swipeOnSock(userId, sock, liked)
+                .onSuccess { isMatch ->
+                    if (isMatch) {
+                        _uiState.value = _uiState.value.copy(
+                            matchMessage = "${SatiricCopy.MATCH_FOUND_TITLE}\n\n${SatiricCopy.MATCH_FOUND_BODY}"
+                        )
+                    }
+                }
+                .onFailure {
+                    // Reinserta la carta al inicio para que el usuario pueda reintentar
                     _uiState.value = _uiState.value.copy(
-                        matchMessage = "${SatiricCopy.MATCH_FOUND_TITLE}\n\n${SatiricCopy.MATCH_FOUND_BODY}"
+                        socks = listOf(sock) + _uiState.value.socks,
+                        error = it.message
                     )
                 }
-            }
         }
     }
 
+    /** Oculta el overlay de match una vez que el usuario lo ha visto. */
     fun dismissMatchMessage() {
         _uiState.value = _uiState.value.copy(matchMessage = null)
     }

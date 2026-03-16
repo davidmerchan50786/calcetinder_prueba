@@ -7,6 +7,20 @@ package com.calcetinder_prueba.util
  */
 object SatiricCopy {
 
+    // ── APP ───────────────────────────────────────────────────────────────────
+
+    const val APP_NAME = "CALCETINDER"
+
+    /** Texto de dismiss genérico para overlays táctiles. */
+    const val DISMISS_HINT = "(Toca para continuar)"
+
+    /** Texto de dismiss específico del overlay de castigo por cara. */
+    const val FACE_DISMISS_HINT =
+        "(Toca para intentarlo de nuevo\ncon un calcetín de verdad)"
+
+    /** Placeholder cuando el nombre del calcetín no está disponible. */
+    const val SOCK_NAME_PLACEHOLDER = "Calcetín misterioso"
+
     // ── AUTH ──────────────────────────────────────────────────────────────────
 
     const val AUTH_TAGLINE =
@@ -116,16 +130,15 @@ object SatiricCopy {
     const val MATCH_FOUND_BODY =
         "Dos prendas menores han encontrado su camino.\nHumanidad: 0. Mercería: 1."
 
-    fun matchCompatibility(): String {
-        val percentages = listOf(
-            "Compatibilidad: 94% (medida en lana)",
-            "Afinidad textil: elevada",
-            "Coincidencia de agujeros: notable",
-            "Sintonía de elásticos: prometedora",
-            "Nivel de desgaste: complementario"
-        )
-        return percentages.random()
-    }
+    val COMPATIBILITY_PHRASES = listOf(
+        "Compatibilidad: 94% (medida en lana)",
+        "Afinidad textil: elevada",
+        "Coincidencia de agujeros: notable",
+        "Sintonía de elásticos: prometedora",
+        "Nivel de desgaste: complementario"
+    )
+
+    fun matchCompatibility(): String = COMPATIBILITY_PHRASES.random()
 
     // ── PERFIL ─────────────────────────────────────────────────────────────────
 

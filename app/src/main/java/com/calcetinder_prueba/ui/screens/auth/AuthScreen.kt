@@ -84,7 +84,7 @@ fun AuthScreen(
 
             // Título principal
             Text(
-                text = "CALCETINDER",
+                text = SatiricCopy.APP_NAME,
                 fontSize = 42.sp,
                 fontWeight = FontWeight.Black,
                 color = CalcetinderPink,

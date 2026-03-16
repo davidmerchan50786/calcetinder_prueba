@@ -139,12 +139,12 @@ private fun MatchCard(match: Match) {
             ) {
                 MatchSockThumbnail(
                     imageUrl = match.sock1ImageUrl,
-                    name = match.sock1Name.ifBlank { "Calcetín misterioso" },
+                    name = match.sock1Name.ifBlank { SatiricCopy.SOCK_NAME_PLACEHOLDER },
                     modifier = Modifier.weight(1f)
                 )
                 MatchSockThumbnail(
                     imageUrl = match.sock2ImageUrl,
-                    name = match.sock2Name.ifBlank { "Calcetín misterioso" },
+                    name = match.sock2Name.ifBlank { SatiricCopy.SOCK_NAME_PLACEHOLDER },
                     modifier = Modifier.weight(1f)
                 )
             }

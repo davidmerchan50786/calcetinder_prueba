@@ -52,8 +52,17 @@ class UploadViewModel @Inject constructor(
             _uiState.value = UploadUiState.Error("Selecciona una imagen.\nEl calcetín no va a subirse solo.")
             return
         }
+        // Límite de 50 chars alineado con la regla de Firestore (name.size() <= 50)
         if (name.isBlank()) {
             _uiState.value = UploadUiState.Error("Ponle nombre al calcetín.\nHasta el más ordinario merece uno.")
+            return
+        }
+        if (name.trim().length > 50) {
+            _uiState.value = UploadUiState.Error("Nombre demasiado largo.\nMáximo 50 caracteres.\nLa humildad te hará mejor persona.")
+            return
+        }
+        if (description.length > 300) {
+            _uiState.value = UploadUiState.Error("Descripción demasiado larga.\nMáximo 300 caracteres.\nLos calcetines no necesitan novelas.")
             return
         }
         if (userId == null) {

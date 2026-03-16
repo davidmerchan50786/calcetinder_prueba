@@ -259,7 +259,7 @@ fun UploadScreen(
                     )
                     Spacer(modifier = Modifier.height(40.dp))
                     Text(
-                        text = "(Toca para intentarlo de nuevo\ncon un calcetín de verdad)",
+                        text = SatiricCopy.FACE_DISMISS_HINT,
                         color = Color.White.copy(alpha = 0.6f),
                         fontSize = 13.sp,
                         textAlign = TextAlign.Center,

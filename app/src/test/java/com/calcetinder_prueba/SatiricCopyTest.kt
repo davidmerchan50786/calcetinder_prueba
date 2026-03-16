@@ -74,25 +74,32 @@ class SatiricCopyTest {
 
     @Test
     fun matchCompatibility_returnsNonEmptyString() {
-        repeat(20) {
-            // Llamamos 20 veces para cubrir el random
-            val result = SatiricCopy.matchCompatibility()
-            assertNotNull(result)
-            assertTrue(result.isNotBlank())
+        // Comprueba que la función devuelve un valor de la lista pública
+        val result = SatiricCopy.matchCompatibility()
+        assertNotNull(result)
+        assertTrue(result.isNotBlank())
+        assertTrue(
+            "matchCompatibility() debe devolver una frase del catálogo",
+            SatiricCopy.COMPATIBILITY_PHRASES.contains(result)
+        )
+    }
+
+    @Test
+    fun matchCompatibility_allPhrasesAreNonEmpty() {
+        // Todas las frases del catálogo deben ser no vacías — test determinista
+        SatiricCopy.COMPATIBILITY_PHRASES.forEach { phrase ->
+            assertTrue("Frase vacía detectada: '$phrase'", phrase.isNotBlank())
         }
     }
 
     @Test
     fun matchCompatibility_returnsKnownPhrase() {
-        // El resultado debe ser siempre uno de los valores definidos en la función
-        val knownPhrases = listOf(
-            "lana", "textil", "agujeros", "elásticos", "desgaste"
-        )
-        repeat(30) {
-            val result = SatiricCopy.matchCompatibility()
+        // Itera sobre todo el catálogo de forma determinista
+        val knownKeywords = listOf("lana", "textil", "agujeros", "elásticos", "desgaste")
+        SatiricCopy.COMPATIBILITY_PHRASES.forEach { phrase ->
             assertTrue(
-                "matchCompatibility() debe devolver una frase del catálogo",
-                knownPhrases.any { keyword -> result.contains(keyword, ignoreCase = true) }
+                "La frase '$phrase' no contiene ninguna palabra clave esperada",
+                knownKeywords.any { keyword -> phrase.contains(keyword, ignoreCase = true) }
             )
         }
     }

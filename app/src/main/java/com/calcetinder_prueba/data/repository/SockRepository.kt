@@ -22,8 +22,11 @@ class SockRepository @Inject constructor() {
 
     /**
      * Devuelve calcetines que el usuario aún no ha visto.
-     * Excluye los propios y los ya swiped.
-     * Para datasets pequeños (educativo): filtramos en cliente.
+     * Excluye los propios y los ya swiped, filtrando en cliente.
+     *
+     * NOTA DE ESCALABILIDAD: al crecer el dataset (>10k swipes por usuario),
+     * esta carga inicial de IDs vistos debe migrarse a filtrado server-side
+     * mediante un índice compuesto en Firestore o una Cloud Function.
      */
     fun getSocksToSwipe(currentUserId: String): Flow<List<Sock>> = callbackFlow {
         val swipedIds = try {
@@ -111,11 +114,15 @@ class SockRepository @Inject constructor() {
 
             if (reverseSwipes.isEmpty) return Result.success(false)
 
-            // Match! Obtenemos los datos del calcetín del otro usuario para el match
+            // Match! Obtenemos los datos del calcetín del otro usuario para el match.
+            // Si el sockId es nulo o el documento no existe, descartamos silenciosamente
+            // el match para evitar escribir datos corruptos en Firestore.
             val theirSock = reverseSwipes.documents.first()
-            val theirSockId = theirSock.getString("sockId") ?: ""
+            val theirSockId = theirSock.getString("sockId")
+                ?: return Result.success(false)
             val theirSockDoc = db.collection("socks").document(theirSockId).get().await()
             val theirSockData = theirSockDoc.toObject(Sock::class.java)
+                ?: return Result.success(false)
 
             val matchRef = db.collection("matches").document()
             matchRef.set(

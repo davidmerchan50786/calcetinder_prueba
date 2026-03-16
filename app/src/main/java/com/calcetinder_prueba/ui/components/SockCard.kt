@@ -39,6 +39,7 @@ import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 private const val SWIPE_THRESHOLD = 140f
+private const val ROTATION_DIVISOR = 28f
 
 @Composable
 fun SockCard(
@@ -51,7 +52,7 @@ fun SockCard(
     val offsetX = remember { Animatable(0f) }
     val offsetY = remember { Animatable(0f) }
 
-    val rotation = offsetX.value / 28f
+    val rotation = offsetX.value / ROTATION_DIVISOR
     val overlayAlpha = (abs(offsetX.value) / 250f).coerceIn(0f, 1f)
     val isLiking = offsetX.value > 0
 

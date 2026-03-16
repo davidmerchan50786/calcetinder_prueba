@@ -77,7 +77,7 @@ fun SwipeScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "CALCETINDER",
+                    text = SatiricCopy.APP_NAME,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Black,
                     color = CalcetinderPink,
@@ -221,7 +221,7 @@ private fun MatchOverlay(message: String, onDismiss: () -> Unit) {
             )
             Spacer(modifier = Modifier.height(32.dp))
             Text(
-                text = "(Toca para continuar)",
+                text = SatiricCopy.DISMISS_HINT,
                 color = Color.Gray,
                 fontSize = 12.sp
             )
