@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    // kotlin.android lo aplica AGP 9.x automáticamente — no declarar aquí o genera conflicto:
-    // "Cannot add extension with name 'kotlin', as there is an extension already registered"
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
     // Hilt requiere su propio plugin para generar el código de inyección
@@ -12,16 +11,12 @@ plugins {
 
 android {
     namespace = "com.calcetinder_prueba"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.calcetinder_prueba"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
