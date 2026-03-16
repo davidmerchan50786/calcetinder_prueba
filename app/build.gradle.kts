@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    // kotlin.android lo aplica AGP 9.x automáticamente — no declarar aquí o genera conflicto:
+    // "Cannot add extension with name 'kotlin', as there is an extension already registered"
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
     // Hilt requiere su propio plugin para generar el código de inyección
