@@ -43,7 +43,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.calcetinder_prueba.ui.theme.CalcetinderPink
-import com.calcetinder_prueba.ui.theme.CalcetinderPinkLight
 import com.calcetinder_prueba.util.SatiricCopy
 
 @Composable

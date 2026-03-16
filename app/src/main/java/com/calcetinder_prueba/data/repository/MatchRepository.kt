@@ -3,7 +3,6 @@ package com.calcetinder_prueba.data.repository
 import com.calcetinder_prueba.data.model.Match
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.Filter
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -30,11 +29,11 @@ class MatchRepository @Inject constructor() {
                     Filter.equalTo("user2Id", userId)
                 )
             )
-            .orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) { close(error); return@addSnapshotListener }
                 val matches = snapshot?.documents
                     ?.mapNotNull { doc -> doc.toObject(Match::class.java)?.copy(id = doc.id) }
+                    ?.sortedByDescending { it.createdAt }
                     ?: emptyList()
                 trySend(matches)
             }
